@@ -19,9 +19,62 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <junit-jupiter-api.version>5.11.0-M1</junit-jupiter-api.version>
     <mockito-core.version>5.11.0</mockito-core.version>
+    <gt-main.version>31.0</gt-main.version>
   </properties>
 
+  <repositories>
+    <repository>
+      <id>osgeo</id>
+      <name>OSGeo Release Repository</name>
+      <url>https://repo.osgeo.org/repository/release/</url>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+    </repository>
+    <repository>
+      <id>osgeo-snapshot</id>
+      <name>OSGeo Snapshot Repository</name>
+      <url>https://repo.osgeo.org/repository/snapshot/</url>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+    </repository>
+  </repositories>
+
   <dependencies>
+
+    <!-- https://mvnrepository.com/artifact/org.geotools/gt-main -->
+    <dependency>
+      <groupId>org.geotools</groupId>
+      <artifactId>gt-main</artifactId>
+      <version>${gt-main.version}</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.geotools/gt-shapefile -->
+    <dependency>
+      <groupId>org.geotools</groupId>
+      <artifactId>gt-shapefile</artifactId>
+      <version>${gt-main.version}</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.geotools/gt-cql -->
+    <dependency>
+      <groupId>org.geotools</groupId>
+      <artifactId>gt-cql</artifactId>
+      <version>${gt-main.version}</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.geotools/gt-geojson -->
+    <dependency>
+      <groupId>org.geotools</groupId>
+      <artifactId>gt-geojson</artifactId>
+      <version>${gt-main.version}</version>
+    </dependency>
+
+
     <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->
     <dependency>
       <groupId>org.junit.jupiter</groupId>
