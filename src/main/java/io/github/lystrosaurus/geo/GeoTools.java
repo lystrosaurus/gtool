@@ -1,8 +1,8 @@
 package io.github.lystrosaurus.geo;
 
-import io.github.lystrosaurus.exceptions.GException;
 import java.io.IOException;
 import java.util.Optional;
+import lombok.extern.slf4j.Slf4j;
 import org.geotools.api.data.FileDataStoreFinder;
 import org.geotools.api.data.SimpleFeatureSource;
 import org.geotools.api.feature.simple.SimpleFeature;
@@ -20,22 +20,24 @@ import org.locationtech.jts.geom.GeometryFactory;
  *
  * @author eric 2024/5/10 9:30
  */
+@Slf4j
 public class GeoTools {
-
-  private static final SimpleFeatureSource featureSource;
-
-  static {
-    try {
-      featureSource = FileDataStoreFinder
-          .getDataStore(GeoTools.class.getClassLoader().getResource("gadm/gadm41_CHN_3.shp"))
-          .getFeatureSource();
-    } catch (IOException e) {
-      throw new GException(e);
-    }
-  }
 
   private GeoTools() {
 
+  }
+
+  private static SimpleFeatureSource featureSource;
+
+  static {
+    String path = "gadm/gadm41_CHN_3.shp";
+    try {
+      featureSource = FileDataStoreFinder
+          .getDataStore(GeoTools.class.getClassLoader().getResource(path))
+          .getFeatureSource();
+    } catch (IOException e) {
+      log.error("failed to load content from {}", path, e);
+    }
   }
 
   /**
