@@ -22,12 +22,12 @@ import org.locationtech.jts.geom.GeometryFactory;
  */
 public class GeoTools {
 
-  private static SimpleFeatureSource featureSource = null;
+  private static final SimpleFeatureSource featureSource;
 
   static {
     try {
       featureSource = FileDataStoreFinder
-          .getDataStore(GeoTools.class.getClassLoader().getResource("gadm41_CHN_3.shp"))
+          .getDataStore(GeoTools.class.getClassLoader().getResource("gadm/gadm41_CHN_3.shp"))
           .getFeatureSource();
     } catch (IOException e) {
       throw new GException(e);

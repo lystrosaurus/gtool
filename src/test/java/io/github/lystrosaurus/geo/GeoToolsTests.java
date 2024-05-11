@@ -42,5 +42,11 @@ class GeoToolsTests {
     Assertions.assertTrue(provinceName3.isPresent());
     Assertions.assertEquals("江蘇|江苏", provinceName3.get());
     System.out.println(System.currentTimeMillis() - time3);
+
+    double latitude4 = 31.401347;  // 维度
+    double longitude4 = 180.968905;  // 经度
+    final Optional<String> provinceName4 = GeoTools
+        .getProvinceName(latitude4, longitude4);
+    Assertions.assertFalse(provinceName4.isPresent());
   }
 }
