@@ -22,11 +22,11 @@ import org.locationtech.jts.geom.GeometryFactory;
  */
 public class GeoTools {
 
-  private final SimpleFeatureSource featureSource;
+  private static SimpleFeatureSource featureSource = null;
 
-  private GeoTools() {
+  static {
     try {
-      this.featureSource = FileDataStoreFinder
+      featureSource = FileDataStoreFinder
           .getDataStore(GeoTools.class.getClassLoader().getResource("gadm41_CHN_3.shp"))
           .getFeatureSource();
     } catch (IOException e) {
@@ -34,13 +34,8 @@ public class GeoTools {
     }
   }
 
-  private static class GeoToolsHolder {
+  private GeoTools() {
 
-    private static final GeoTools INSTANCE = new GeoTools();
-  }
-
-  public static GeoTools getInstance() {
-    return GeoToolsHolder.INSTANCE;
   }
 
   /**
@@ -50,7 +45,7 @@ public class GeoTools {
    * @param longitude 经度.
    * @return 经纬度所在城市, 判断失误返回 Optional.empty()
    */
-  public Optional<String> getProvinceName(double latitude, double longitude)
+  public static Optional<String> getProvinceName(double latitude, double longitude)
       throws IOException, CQLException {
 
     // 创建查询过滤器
@@ -59,7 +54,7 @@ public class GeoTools {
 
     String cqlFilter = "INTERSECTS(the_geom, " + point + ")";
     Filter filter = ECQL.toFilter(cqlFilter);
-    final SimpleFeatureCollection features = this.featureSource.getFeatures(filter);
+    final SimpleFeatureCollection features = featureSource.getFeatures(filter);
 
     try (SimpleFeatureIterator featureIterator = features.features()) {
       if (featureIterator.hasNext()) {
